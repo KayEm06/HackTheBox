@@ -8,7 +8,7 @@ We can access the website hosted on port 80 and explore the website. Whilst expl
 
 ![image](https://github.com/KayEm06/HackTheBox/assets/62169414/177c9e80-30f8-49aa-91af-fdfcb9e3f5f6)
 
-Of all the endpoints, two stand out: `/login` and `/invite`. I begin with the login page by entering possible default credentials, attempting SQL injection, and Cross-Site Scripting on the `error` query parameter, but to no success.
+Of all the endpoints, two stand out: `/login` and `/invite`. I begin with the login page by entering possible default credentials, attempting SQL injection, and Cross-Site Scripting on the `error` query parameter, but with no success.
 
 Looking at the source code of the invite page, one JavaScript program has an interesting filename (`/js/inviteapi.min/js'). The program seems to be obfuscated with regular expression so we can run it through an online JavaScript beautifier. The [deobfuscated program](https://github.com/KayEm06/HackTheBox/blob/main/2million/inviteapi.js) shows two used to verify and generate invite codes. We can attempt to generate an invite code by sending a POST request to `/api/v1/invite/how/to/generate`
 
@@ -24,7 +24,7 @@ _(At this point the ffuf scan has completed and found zero directories.)_
 
 Invite code: JKIEK-XIHK7-6RG2Q-37HSH
 
-We can go back to the invite page and enter our invite code, this redirects to us a register page. Once registered, we are redirected to the home page and we can begin exploring. Most of the endpoints are dummy endpoints so I refer a writeup made by @madfoxsec to find a number of endpoints at `/api/v1`. I load up burpsuite to speed up the process of accessing all endpoints.
+We can backtrack to the invite page and enter our invite code, which redirects us to a register page. Once registered, we are redirected to the home page and can begin exploring. Most of the endpoints are dummy endpoints so I refer to a writeup made by @madfoxsec to find several endpoints at `/api/v1`. I load up burpsuite to speed up the process of accessing all endpoints.
 
 ![image](https://github.com/KayEm06/HackTheBox/assets/62169414/abc4d603-4466-439a-b429-d695dacd8117)
 
@@ -36,20 +36,10 @@ We can go back to the invite page and enter our invite code, this redirects to u
 
 ![image](https://github.com/KayEm06/HackTheBox/assets/62169414/c5e2189a-7c47-4f7e-a6c7-ae483d1b7444)
 
-![image](https://github.com/KayEm06/HackTheBox/assets/62169414/a5987d56-d8d8-45ec-addc-5792b307aeac)
-
-![image](https://github.com/KayEm06/HackTheBox/assets/62169414/d04a3fb0-c502-44cb-ac27-c476482709ec)
-And we're in!
-![image](https://github.com/KayEm06/HackTheBox/assets/62169414/34830e0c-e8d4-4629-8cf6-893b4ce952ab)
-
-
 ![image](https://github.com/KayEm06/HackTheBox/assets/62169414/9ab07226-bedb-44e7-a54b-c9dd0c761b7c)
 
 ![image](https://github.com/KayEm06/HackTheBox/assets/62169414/6dd47a92-a3c9-4d03-a7d1-6772840d4e15)
 
 ![image](https://github.com/KayEm06/HackTheBox/assets/62169414/0ba0509a-41c2-4256-9ce4-806c50cea998)
 
-
-
-
-
+![image](https://github.com/KayEm06/HackTheBox/assets/62169414/41acf416-0198-4e0a-8bbd-1ad8ef54e84f)
